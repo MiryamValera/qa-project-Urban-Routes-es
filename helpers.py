@@ -35,13 +35,13 @@ def wait_for_ask_taxi_button(self):
     WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(self.UrbanRoutesPage.ask_for_taxi_button))
 
 def wait_for_reserve_button(self):
-    # Esperar que todos los elementos cargen y el botón de reserva sea clickeable.
+    #Tiempo de espera: Todos los elementos cargan y el botón de reserva debe ser clickeable
     WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(self.UrbanRoutesPage.reserve_button))
 
 def standard_wait_time(self):
-    # Esperar a que los elementos cargen por 2 segundos.
+    #Tiempo de espera: "Los elementos cargan por 2 segundos
     WebDriverWait(self.driver, 2)
 
 def wait_for_countdown_to_finish(self):
-    # Esperar a que el timer el pedido llegue a "0".
+    #Tiempo de espera: El timer del pedido tiene que llegar a "0"
     WebDriverWait(self.driver, 35).until(expected_conditions.visibility_of_element_located(self.UrbanRoutesPage.taxi_driver_is_selected))
