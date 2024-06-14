@@ -22,7 +22,9 @@ Urban Routes es una aplicación web diseñada para solicitar servicios de taxi c
 ### Entorno de Pruebas 🖥️
 
 **Sistema Operativo:** Windows 11
+
 **Navegador:** Google Chrome
+
 **Resolución de Pantalla:** 1366 x 768
    
 ### Estructura del Proyecto 🗂️
@@ -34,12 +36,19 @@ Urban Routes es una aplicación web diseñada para solicitar servicios de taxi c
 Las pruebas automatizadas cubren el siguiente flujo de trabajo:
 
 **1.** Configurar la dirección de origen y destino.
+
 **2.** Seleccionar la tarifa Comfort.
+
 **3.** Rellenar el número de teléfono.
+
 **4.** Agregar una tarjeta de crédito.
+
 **5.** Escribir un mensaje para el conductor.
+
 **6.** Solicitar una manta y pañuelos.
+
 **7.** Pedir 2 helados.
+
 **8.** Proceder a buscar un taxi y esperar a que aparezca la información del conductor (opcional).
 
 ### Contribuciones 🤝
