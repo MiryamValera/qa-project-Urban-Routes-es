@@ -4,7 +4,7 @@ import data
 from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -39,13 +39,17 @@ class TestUrbanRoutes:
         helpers.wait_for_ask_taxi_button()
         routes_page.click_ask_for_taxi_button()
         helpers.wait_for_reserve_button()
-        assert True, expected_conditions.visibility_of_element_located((By.CLASS_NAME, 'np-button'))
+        assert EC.visibility_of_element_located((By.CLASS_NAME, 'np-button'))
 
     def test_select_comfort_category(self):
         # Prueba para validar que la tarifa "Comfort" a sido seleccionada.
         routes_page = UrbanRoutesPage.UrbanRoutesPage(self.driver)
         routes_page.click_comfort_category()
-        assert True, expected_conditions.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[2]/div[4]/div[2]/div[1]/div/div[1]'))
+        #CORRECIÓN DE SELECTORES
+        comfort_category = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, '.tcard.active .tcard-title'))
+        )
+        assert comfort_category.text == "Comfort"
 
     def test_set_phone_number(self):
         # Prueba para introducir un número telefónico.
@@ -63,8 +67,11 @@ class TestUrbanRoutes:
         card_code = data.card_code
         # proceso del metodo de pago
         routes_page.set_steps_payment_method(card_number, card_code)
-        # verificación que el metodo de pago funcionó
-        assert True, routes_page.check_agree_card()
+        # Verificación que el metodo de pago funcionó
+        payment_value_text = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, 'pp-value-text'))
+        )
+        assert payment_value_text.text == "Tarjeta"
         # cierre de ventana de metodo de pago
         routes_page.click_close_pop_up_card_windows()
 
@@ -95,13 +102,13 @@ class TestUrbanRoutes:
         routes_page = UrbanRoutesPage.UrbanRoutesPage(self.driver)
         # Hace click pedir un taxi y espera hasta que el sistema seleccione un conductor
         routes_page.click_find_taxi()
-        assert True, routes_page.check_header_order_title()
+        assert routes_page.check_header_order_title()
 
     def test_check_show_name_driver_modal(self):
         # Crea una instancia de UrbanRoutesPage pasando el driver como argumento.
         routes_page = UrbanRoutesPage.UrbanRoutesPage(self.driver)
         helpers.wait_for_countdown_to_finish()
-        assert True, routes_page.check_taxi_driver_is_selected()
+        assert routes_page.check_taxi_driver_is_selected()
 
     @classmethod
     def teardown_class(cls):
